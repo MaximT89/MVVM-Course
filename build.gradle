@@ -11,4 +11,5 @@ task clean(type: Delete) {
 
 ext {
     lifecycleVersion = '2.4.1'
+    fragmentKtxVersion = '1.4.1'
 }
