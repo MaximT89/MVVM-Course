@@ -2,25 +2,25 @@ package com.secondworld.mvvmcoursenew.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-import com.secondworld.mvvmcoursenew.R
+import androidx.activity.viewModels
 import com.secondworld.mvvmcoursenew.data.repository.Repository
 import com.secondworld.mvvmcoursenew.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    lateinit var viewModel : MainViewModel
+    private val viewModel : MainViewModel by viewModels{ ViewModelFactory(Repository()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initViewModel()
+
+        initView()
     }
 
-    private fun initViewModel() {
-        val repository = Repository()
-        viewModel = ViewModelProvider(this, ViewModelFactory(repository)).get(MainViewModel::class.java)
+    private fun initView() {
+        binding.textResult.text = viewModel.getDataFromRepository()
     }
+
 }
